@@ -4,7 +4,6 @@ const deck = document.querySelector('.deck');
 document.querySelector(".restart").addEventListener("click", restartGame);
 
 function startGame() {
-	deck.innerHTML = '';
 	var shuffledCardsAll = shuffle(allCardsClosedArray);
 	for(var shuffledCard of shuffledCardsAll){
     deck.appendChild(shuffledCard);
@@ -31,14 +30,21 @@ if (movesTotal.length <= 1) {
 document.querySelector('.stars').style.color = "yellow";
 } else if (movesTotal.length >= 2 && movesTotal.length <= 3) {
 document.querySelector('#star-one').style.color = "gray";
-} else if (movesTotal.length >= 4) {
+} else if (movesTotal.length >= 4 && movesTotal.length <= 5) {
 document.querySelector('#star-two').style.color = "gray";
+} else if (movesTotal.length >= 6 && movesTotal.length <= 7) {
+document.querySelector('#star-three').style.color = "gray";
+} else if (movesTotal.length >= 8 && movesTotal.length <= 9) {
+document.querySelector('#star-four').style.color = "gray";
+} else if (movesTotal.length >= 10) {
+document.querySelector('#star-five').style.color = "gray";
 }
 };
 
 
  allCardsClosedArray.forEach(function(card){
    card.addEventListener('click', function(e) {
+		 updateStars();
      if (!card.classList.contains('open') && !card.classList.contains('show')) {
      openCards.push(card);
      card.classList.add('open', 'show');
@@ -50,7 +56,6 @@ document.querySelector('#star-two').style.color = "gray";
 
        if (movesTotal.length <= 1) {
          startTimer();
-         updateStars();
 };
 
 
