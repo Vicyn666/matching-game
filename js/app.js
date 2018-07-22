@@ -1,88 +1,27 @@
-/*
- * Create a list that holds all of your cards
- */
 const cardsAll = document.getElementsByClassName('card');
 const allCardsClosedArray = [...cardsAll];
 const deck = document.querySelector('.deck');
-var i = 100;
 
-console.log(allCardsClosedArray);
 function startGame() {
 	deck.innerHTML = '';
 	var shuffledCards = shuffle(allCardsClosedArray);
 	for(var newCard of shuffledCards){
-    i++
     deck.appendChild(newCard);
 		newCard.classList.remove("open","show","match");
 	}
   let cardsAllShuffled = document.getElementsByClassName('card');
   const allCardsClosedArrayShuffled = [...cardsAllShuffled];
-  console.log(allCardsClosedArrayShuffled);
 };
 
 startGame ();
-console.log("startgame");
+
 
  let openCards = [];
  let matchedCards = [];
  let moves = 0;
  let movesTotal = [];
 
- function timer () {
-   var sec = 0;
-    function pad ( val ) {
-      return val > 9 ? val : "0" + val;
-    }
-    setInterval(function(){
-      document.getElementById("sec").innerHTML=pad(++sec%60);
-      document.getElementById("min").innerHTML=pad(parseInt(sec/60,10));
-    }, 1000);
- }
 
- //When game finishes and modal appears
-
- function endGame () {
-
-   const modal = document.querySelector(".modal");
-   modal.style.display = "block";
-
-   let totalSeconds = document.getElementById("seconds").innerHTML;
-   let totalMinutes = document.getElementById("minutes").innerHTML;
-
-   finalSeconds.innerHTML = `${totalSeconds}`;
-   finalMinutes.innerHTML = `${totalMinutes}`;
-
-   let totalMoves = movesTotal.length;
-   movesFinal.innerHTML = `${totalMoves}`;
-   if (totalMoves <= 20) {
-     starTotal.innerHTML = '3';
-   } else if(totalMoves >= 35 && totalMoves <= 20) {
-     starTotal.innerHTML = '2';
-   } else {
-     starTotal.innerHTML = '1';
-   }
- }
-
- //restart and reset inspired from https://stackoverflow.com/questions/6666363/is-it-possible-to-clear-a-form-and-reset-reload-the-page-with-one-button
-
- document.querySelector(".restart").addEventListener("click", restartGame);
-
- function restartGame(){
-   window.location.href = window.location.href;
- }
-
- reset.addEventListener("click", resetGame);
-
- function resetGame() {
-   window.location.href = window.location.href;
- }
-
-/*
- startGame();
-*/
-
-
- //thankful for this webinar that helped me get started: https://www.youtube.com/watch?v=_rUH-sEs68Y
 
 
  allCards.forEach(function(card){
@@ -141,12 +80,70 @@ console.log("startgame");
  });
 
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+
+
+
+
+
+
+
+
+
+
+ function timer () {
+   var sec = 0;
+    function pad ( val ) {
+      return val > 9 ? val : "0" + val;
+    }
+    setInterval(function(){
+      document.getElementById("sec").innerHTML=pad(++sec%60);
+      document.getElementById("min").innerHTML=pad(parseInt(sec/60,10));
+    }, 1000);
+ }
+
+ //When game finishes and modal appears
+
+ function endGame () {
+
+   const modal = document.querySelector(".modal");
+   modal.style.display = "block";
+
+   let totalSeconds = document.getElementById("seconds").innerHTML;
+   let totalMinutes = document.getElementById("minutes").innerHTML;
+
+   finalSeconds.innerHTML = `${totalSeconds}`;
+   finalMinutes.innerHTML = `${totalMinutes}`;
+
+   let totalMoves = movesTotal.length;
+   movesFinal.innerHTML = `${totalMoves}`;
+   if (totalMoves <= 20) {
+     starTotal.innerHTML = '3';
+   } else if(totalMoves >= 35 && totalMoves <= 20) {
+     starTotal.innerHTML = '2';
+   } else {
+     starTotal.innerHTML = '1';
+   }
+ }
+
+ //restart and reset inspired from https://stackoverflow.com/questions/6666363/is-it-possible-to-clear-a-form-and-reset-reload-the-page-with-one-button
+
+ document.querySelector(".restart").addEventListener("click", restartGame);
+
+ function restartGame(){
+   window.location.href = window.location.href;
+ }
+
+ reset.addEventListener("click", resetGame);
+
+ function resetGame() {
+   window.location.href = window.location.href;
+ }
+
+
+ //thankful for this webinar that helped me get started: https://www.youtube.com/watch?v=_rUH-sEs68Y
+
+
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -163,15 +160,3 @@ function shuffle(array) {
 
     return array;
 }
-
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
