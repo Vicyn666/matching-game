@@ -91,6 +91,7 @@ h1 {
     margin-bottom: 10px;
 }
 
+
 .score-panel .stars {
     margin: 0;
     padding: 0;
@@ -106,4 +107,42 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+
+/*
+
+@media screen and (min-width: 360px) {
+    .container {
+        width: 100%;
+        display: flex;
+    }
+    .deck {
+        width: 70%;
+    }
+    html,
+    body,
+    header,
+    section,
+    h1 {
+        font-size: 40px;
+    }
+}
+
+@media screen and (min-width: 700px) {
+    .deck {
+        width: 65%;
+    }
+}
+
+@media screen and (min-width: 850px) {
+    .deck {
+        width: 660px;
+    }
+    html,
+    body,
+    header,
+    section,
+    h1 {
+        font-size: 30px;
+    }
 }

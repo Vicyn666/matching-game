@@ -1,56 +1,60 @@
 const cardsAll = document.getElementsByClassName('card');
 const allCardsClosedArray = [...cardsAll];
 const deck = document.querySelector('.deck');
+document.querySelector(".restart").addEventListener("click", restartGame);
 
 function startGame() {
 	deck.innerHTML = '';
-	var shuffledCards = shuffle(allCardsClosedArray);
-	for(var newCard of shuffledCards){
-    deck.appendChild(newCard);
-		newCard.classList.remove("open","show","match");
+	var shuffledCardsAll = shuffle(allCardsClosedArray);
+	for(var shuffledCard of shuffledCardsAll){
+    deck.appendChild(shuffledCard);
+		shuffledCard.classList.remove("match");
+    shuffledCard.classList.add("open", "show");
 	}
-  let cardsAllShuffled = document.getElementsByClassName('card');
-  const allCardsClosedArrayShuffled = [...cardsAllShuffled];
+  setInterval(function(){
+    for(var shuffledCard2 of shuffledCardsAll){
+      shuffledCard2.classList.remove("open", "show");
+  	}
+  }, 1000);
 };
 
 startGame ();
-
 
  let openCards = [];
  let matchedCards = [];
  let moves = 0;
  let movesTotal = [];
 
+function updateStars() {
+
+if (movesTotal.length <= 1) {
+document.querySelector('.stars').style.color = "yellow";
+} else if (movesTotal.length >= 2 && movesTotal.length <= 3) {
+document.querySelector('#star-one').style.color = "gray";
+} else if (movesTotal.length >= 4) {
+document.querySelector('#star-two').style.color = "gray";
+}
+};
 
 
-
- allCards.forEach(function(card){
-
+ allCardsClosedArray.forEach(function(card){
    card.addEventListener('click', function(e) {
      if (!card.classList.contains('open') && !card.classList.contains('show')) {
      openCards.push(card);
      card.classList.add('open', 'show');
      console.log('Open Cards:', openCards.length);
      movesTotal.push(moves);
-     console.log(movesTotal.length);
+     console.log('Moves Total:', movesTotal.length);
      const totalMoves = document.querySelector('.moves');
      totalMoves.textContent = movesTotal.length;
 
        if (movesTotal.length <= 1) {
-         timer();
-         const yellowStars = document.querySelector('.stars');
-         yellowStars.style.color = '#FFA500';
+         startTimer();
+         updateStars();
+};
 
-       } else if (movesTotal.length >= 20 && movesTotal.length <=35) {
-
-             document.getElementById('star1').style.color = 'grey';
-           } else if (movesTotal.length >= 36  ){
-
-             document.getElementById('star2').style.color = 'grey';
-       }
 
        if (openCards.length == 2) {
-
          if (openCards[0].innerHTML == openCards[1].innerHTML) {
            console.log("match");
            openCards[0].classList.add('match', 'open', 'show');
@@ -68,7 +72,7 @@ startGame ();
                card.classList.remove('open', 'show');
              });
              openCards = [];
-           }, 700);
+           }, 1000);
          }
        }
      }
@@ -80,17 +84,7 @@ startGame ();
  });
 
 
-
-
-
-
-
-
-
-
-
-
- function timer () {
+ function startTimer () {
    var sec = 0;
     function pad ( val ) {
       return val > 9 ? val : "0" + val;
@@ -108,8 +102,8 @@ startGame ();
    const modal = document.querySelector(".modal");
    modal.style.display = "block";
 
-   let totalSeconds = document.getElementById("seconds").innerHTML;
-   let totalMinutes = document.getElementById("minutes").innerHTML;
+   let totalSeconds = document.getElementById("sec").innerHTML;
+   let totalMinutes = document.getElementById("min").innerHTML;
 
    finalSeconds.innerHTML = `${totalSeconds}`;
    finalMinutes.innerHTML = `${totalMinutes}`;
@@ -125,38 +119,20 @@ startGame ();
    }
  }
 
- //restart and reset inspired from https://stackoverflow.com/questions/6666363/is-it-possible-to-clear-a-form-and-reset-reload-the-page-with-one-button
-
- document.querySelector(".restart").addEventListener("click", restartGame);
 
  function restartGame(){
    window.location.href = window.location.href;
  }
 
- reset.addEventListener("click", resetGame);
-
- function resetGame() {
-   window.location.href = window.location.href;
- }
-
-
- //thankful for this webinar that helped me get started: https://www.youtube.com/watch?v=_rUH-sEs68Y
-
-
-
-
-// Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
-      console.log("shuffle:", currentIndex);
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
         temporaryValue = array[currentIndex];
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
     return array;
 }
