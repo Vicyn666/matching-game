@@ -1,17 +1,28 @@
 const cardsAll = document.getElementsByClassName('card');
 const allCardsClosedArray = [...cardsAll];
+const shuffledCardsAll = shuffle(allCardsClosedArray);
+
 const deck = document.querySelector('.deck');
+
 document.querySelector(".restart").addEventListener("click", restartGame);
 
 function startGame() {
-	var shuffledCardsAll = shuffle(allCardsClosedArray);
-	for(var shuffledCard of shuffledCardsAll){
+		for(let shuffledCard of shuffledCardsAll){
 		deck.appendChild(shuffledCard);
-		shuffledCard.classList.remove("match", "open", "show");
+		shuffledCard.classList.add("match", "open", "show");
 	};
+		setTimeout(function() {
+				hideCards()
+			}, 3000)
 };
-startGame ();
 
+function hideCards(){
+	for(let shuffledCard of shuffledCardsAll){
+		shuffledCard.classList.remove("match", "open", "show");
+	}
+};
+
+startGame ();
  let openCards = [];
  let matchedCards = [];
  let moves = 0;
@@ -20,10 +31,8 @@ startGame ();
 function addEventListenerForCards() {
 	for (const c of allCardsClosedArray){
 		c.addEventListener('click', function() {
-			console.log(c);
 			card = c;
 			mainFunction();
-			card = 0;
 		}, false);
 	}
 }
@@ -157,4 +166,4 @@ function shuffle(array) {
         array[randomIndex] = temporaryValue;
     }
     return array;
-}
+};
