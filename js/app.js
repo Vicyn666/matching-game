@@ -24,22 +24,7 @@ startGame ();
  let moves = 0;
  let movesTotal = [];
 
-function updateStars() {
 
-if (movesTotal.length <= 1) {
-document.querySelector('.stars').style.color = "yellow";
-} else if (movesTotal.length >= 2 && movesTotal.length <= 3) {
-document.querySelector('#star-one').style.color = "gray";
-} else if (movesTotal.length >= 4 && movesTotal.length <= 5) {
-document.querySelector('#star-two').style.color = "gray";
-} else if (movesTotal.length >= 6 && movesTotal.length <= 7) {
-document.querySelector('#star-three').style.color = "gray";
-} else if (movesTotal.length >= 8 && movesTotal.length <= 9) {
-document.querySelector('#star-four').style.color = "gray";
-} else if (movesTotal.length >= 10) {
-document.querySelector('#star-five').style.color = "gray";
-}
-};
 
 
  allCardsClosedArray.forEach(function(card){
@@ -77,7 +62,7 @@ document.querySelector('#star-five').style.color = "gray";
                card.classList.remove('open', 'show');
              });
              openCards = [];
-           }, 1000);
+           }, 5000);
          }
        }
      }
@@ -86,7 +71,30 @@ document.querySelector('#star-five').style.color = "gray";
        endGame();
      }
    });
- });
+/*end of listener function*/
+
+
+ })
+ ;
+/*end of each function*/
+
+ function updateStars() {
+
+ if (movesTotal.length <= 1) {
+ 	document.querySelector('.stars').style.color = "yellow";
+ 		} else if (movesTotal.length >= 2 && movesTotal.length <= 3) {
+ 			document.querySelector('#star-one').style.color = "gray";
+ 				} else if (movesTotal.length >= 4 && movesTotal.length <= 5) {
+ 				document.querySelector('#star-two').style.color = "gray";
+ 					} else if (movesTotal.length >= 6 && movesTotal.length <= 7) {
+ 					document.querySelector('#star-three').style.color = "gray";
+ 						} else if (movesTotal.length >= 8 && movesTotal.length <= 9) {
+ 						document.querySelector('#star-four').style.color = "gray";
+ 							} else if (movesTotal.length >= 10) {
+ 							document.querySelector('#star-five').style.color = "gray";
+ 							}
+ }
+ ;
 
 
  function startTimer () {
