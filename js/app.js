@@ -1,12 +1,31 @@
 /*
  * Create a list that holds all of your cards
  */
+const cardsAll = document.getElementsByClassName('card');
+const allCardsClosedArray = [...cardsAll];
+const deck = document.querySelector('.deck');
+
+
+// this function to shuffle cards and show it in HTML file
+var start = () => {
+	// get rid of deck content
+	deck.innerHTML = '';
+	// shuffle cards and assign it to shuffledCards variable
+	var shuffledCards = shuffle(allCardsClosedArray);
+	// loop in cards after shuffle
+	for(var newCard of shuffledCards){
+		// fill deck again with cards after shuffle
+		deck.appendChild(newCard);
+		// remove open,show,match classes from li elements
+		newCard.classList.remove("open","show","match");
+		// click event listener to open and show cards
+		newCard.addEventListener("click", openCards);
+	}
+};
 
 
 
- const cards = ['fa-diamond', 'fa-diamond', 'fa-paper-plane-o', 'fa-paper-plane-o', 'fa-anchor', 'fa-anchor', 'fa-bolt', 'fa-bolt', 'fa-cube', 'fa-cube', 'fa-leaf', 'fa-leaf', 'fa-bicycle', 'fa-bicycle', 'fa-bomb', 'fa-bomb'];
-
-
+ /*const cards = ['fa-diamond', 'fa-diamond', 'fa-paper-plane-o', 'fa-paper-plane-o', 'fa-anchor', 'fa-anchor', 'fa-bolt', 'fa-bolt', 'fa-cube', 'fa-cube', 'fa-leaf', 'fa-leaf', 'fa-bicycle', 'fa-bicycle', 'fa-bomb', 'fa-bomb'];
 
  //guidance for dynamically generating cards https://www.vitoshacademy.com/javascript-create-ul-and-li-elements-with-js-with-chained-function/
  let ul = document.createElement('ul');
@@ -25,14 +44,14 @@
      i.classList.add('fa', card);
    }
  });
+*/
 
- let allCards = document.querySelectorAll('.card');
  let openCards = [];
  let matchedCards = [];
  let moves = 0;
  let movesTotal = [];
 
- 
+
 
  function startGame () {
    shuffle(cards);
