@@ -4,69 +4,39 @@
 const cardsAll = document.getElementsByClassName('card');
 const allCardsClosedArray = [...cardsAll];
 const deck = document.querySelector('.deck');
+var i = 100;
 
-
-// this function to shuffle cards and show it in HTML file
-var start = () => {
-	// get rid of deck content
+console.log(allCardsClosedArray);
+function startGame() {
 	deck.innerHTML = '';
-	// shuffle cards and assign it to shuffledCards variable
 	var shuffledCards = shuffle(allCardsClosedArray);
-	// loop in cards after shuffle
 	for(var newCard of shuffledCards){
-		// fill deck again with cards after shuffle
-		deck.appendChild(newCard);
-		// remove open,show,match classes from li elements
+    i++
+    deck.appendChild(newCard);
 		newCard.classList.remove("open","show","match");
-		// click event listener to open and show cards
-		newCard.addEventListener("click", openCards);
 	}
+  let cardsAllShuffled = document.getElementsByClassName('card');
+  const allCardsClosedArrayShuffled = [...cardsAllShuffled];
+  console.log(allCardsClosedArrayShuffled);
 };
 
-
-
- /*const cards = ['fa-diamond', 'fa-diamond', 'fa-paper-plane-o', 'fa-paper-plane-o', 'fa-anchor', 'fa-anchor', 'fa-bolt', 'fa-bolt', 'fa-cube', 'fa-cube', 'fa-leaf', 'fa-leaf', 'fa-bicycle', 'fa-bicycle', 'fa-bomb', 'fa-bomb'];
-
- //guidance for dynamically generating cards https://www.vitoshacademy.com/javascript-create-ul-and-li-elements-with-js-with-chained-function/
- let ul = document.createElement('ul');
- document.getElementById('template').appendChild(ul);
- ul.classList.add('deck');
-
-   cards.forEach(function(card) {
-
-     let li = document.createElement('li');
-     ul.appendChild(li);
-     li.classList.add('card');
-
-     let i = document.createElement('i');
-     li.appendChild(i);
-     for (var j = 0; j < cards.length; j++) {
-     i.classList.add('fa', card);
-   }
- });
-*/
+startGame ();
+console.log("startgame");
 
  let openCards = [];
  let matchedCards = [];
  let moves = 0;
  let movesTotal = [];
 
-
-
- function startGame () {
-   shuffle(cards);
- }
-
- //Timer function from https://stackoverflow.com/questions/5517597/plain-count-up-timer-in-javascript
-
  function timer () {
- var sec = 0;
- function pad ( val ) { return val > 9 ? val : "0" + val; }
- setInterval(function(){
-     document.getElementById("sec").innerHTML=pad(++sec%60);
-     document.getElementById("min").innerHTML=pad(parseInt(sec/60,10));
- }, 1000);
-
+   var sec = 0;
+    function pad ( val ) {
+      return val > 9 ? val : "0" + val;
+    }
+    setInterval(function(){
+      document.getElementById("sec").innerHTML=pad(++sec%60);
+      document.getElementById("min").innerHTML=pad(parseInt(sec/60,10));
+    }, 1000);
  }
 
  //When game finishes and modal appears
@@ -74,7 +44,6 @@ var start = () => {
  function endGame () {
 
    const modal = document.querySelector(".modal");
-
    modal.style.display = "block";
 
    let totalSeconds = document.getElementById("seconds").innerHTML;
@@ -108,8 +77,9 @@ var start = () => {
    window.location.href = window.location.href;
  }
 
+/*
  startGame();
-
+*/
 
 
  //thankful for this webinar that helped me get started: https://www.youtube.com/watch?v=_rUH-sEs68Y
@@ -183,6 +153,7 @@ function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
+      console.log("shuffle:", currentIndex);
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
         temporaryValue = array[currentIndex];
