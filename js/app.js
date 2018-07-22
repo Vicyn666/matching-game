@@ -6,17 +6,10 @@ document.querySelector(".restart").addEventListener("click", restartGame);
 function startGame() {
 	var shuffledCardsAll = shuffle(allCardsClosedArray);
 	for(var shuffledCard of shuffledCardsAll){
-    deck.appendChild(shuffledCard);
-		shuffledCard.classList.remove("match");
-    shuffledCard.classList.add("open", "show");
-	}
-  setInterval(function(){
-    for(var shuffledCard2 of shuffledCardsAll){
-      shuffledCard2.classList.remove("open", "show");
-  	}
-  }, 1000);
+		deck.appendChild(shuffledCard);
+		shuffledCard.classList.remove("match", "open", "show");
+	};
 };
-
 startGame ();
 
  let openCards = [];
@@ -24,62 +17,79 @@ startGame ();
  let moves = 0;
  let movesTotal = [];
 
+function addEventListenerForCards() {
+	for (const c of allCardsClosedArray){
+		c.addEventListener('click', function() {
+			console.log(c);
+			card = c;
+			mainFunction();
+			card = 0;
+		}, false);
+	}
+}
+
+addEventListenerForCards();
+
+function mainFunction() {
+ updateStars();
+
+	if (!card.classList.contains('open') && !card.classList.contains('show')) {
+
+
+	console.log(card);
+
+
+ 	openCards.push(card);
+ 	card.classList.add('open', 'show');
+ 	//console.log('Open Cards:', openCards.length);
+ 	movesTotal.push(moves);
+ 	//console.log('Moves Total:', movesTotal.length);
+ 	const totalMoves = document.querySelector('.moves');
+ 	totalMoves.textContent = movesTotal.length;
+
+
+//first card
+	if (movesTotal.length <= 1) {
+		 startTimer();
+	 };
 
 
 
- allCardsClosedArray.forEach(function(card){
-   card.addEventListener('click', function(e) {
-		 updateStars();
-     if (!card.classList.contains('open') && !card.classList.contains('show')) {
-     openCards.push(card);
-     card.classList.add('open', 'show');
-     console.log('Open Cards:', openCards.length);
-     movesTotal.push(moves);
-     console.log('Moves Total:', movesTotal.length);
-     const totalMoves = document.querySelector('.moves');
-     totalMoves.textContent = movesTotal.length;
 
-       if (movesTotal.length <= 1) {
-         startTimer();
+ 	 if (openCards.length == 2) {
+ 	 	if (openCards[0].innerHTML == openCards[1].innerHTML) {
+
+		console.log("match correct!");
+	 				openCards[0].classList.add('match', 'open', 'show');
+	 				openCards[1].classList.add('match', 'open', 'show');
+
+	 				matchedCards.push(openCards[0]);
+					matchedCards.push(openCards[1]);
+
+	//				console.log("matchedCards.length", matchedCards.length);
+	// 				console.log("document.getElementsByClassName('match').length", document.getElementsByClassName('match').length)																										;
+					openCards = [];
+	 			} else {
+
+	 				setTimeout(function() {
+	 					openCards.forEach(function(card) {
+ 						card.classList.remove('open', 'show');
+ 					});
+ 					openCards = [];
+ 				}, 1000);
+ 			}
+ 		}
+ 	}
+
+ 	if (document.getElementsByClassName('match').length == 16 ) {
+ 		endGame();
+ 	}
 };
 
 
-       if (openCards.length == 2) {
-         if (openCards[0].innerHTML == openCards[1].innerHTML) {
-           console.log("match");
-           openCards[0].classList.add('match', 'open', 'show');
-           openCards[1].classList.add('match', 'open', 'show');
-           openCards = [];
 
-           matchedCards.push(card);
-           console.log(matchedCards.length);
-           console.log(document.getElementsByClassName('match').length);
-
-         } else {
-
-           setTimeout(function() {
-             openCards.forEach(function(card) {
-               card.classList.remove('open', 'show');
-             });
-             openCards = [];
-           }, 5000);
-         }
-       }
-     }
-
-     if (document.getElementsByClassName('match').length == 16 ) {
-       endGame();
-     }
-   });
-/*end of listener function*/
-
-
- })
- ;
-/*end of each function*/
 
  function updateStars() {
-
  if (movesTotal.length <= 1) {
  	document.querySelector('.stars').style.color = "yellow";
  		} else if (movesTotal.length >= 2 && movesTotal.length <= 3) {
@@ -111,7 +121,6 @@ startGame ();
  //When game finishes and modal appears
 
  function endGame () {
-
    const modal = document.querySelector(".modal");
    modal.style.display = "block";
 
