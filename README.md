@@ -1,4 +1,4 @@
-# Memory Game Project
+# Memory / matching Game Project
 
 ## Table of Contents
 
@@ -6,15 +6,10 @@
 * [Contributing](#contributing)
 
 ## Instructions
-
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
-
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+When the index.html file opened the game is started automatically.
+All 16 cards are shuffled and opened for 3 seconds to remember it location.
+After that cards would be closed.
+You should find all pairs of identical cards card by card and open it in minimum clicks.
 
 ## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
